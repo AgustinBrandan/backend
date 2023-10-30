@@ -1,28 +1,50 @@
-
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const HttpError = require("../models/http.error");
-
-const Producto = require('../models/producto'); // Importa el modelo de Producto
+const Categoria = require('../models/categoria')
+const Producto = require("../models/producto"); // Importa el modelo de Producto
 
 const listarProductos = async (req, res, next) => {
   try {
     const productos = await Producto.find();
     res.status(200).json(productos);
   } catch (err) {
-    return next(new HttpError("Algo salió mal, no se pudo encontrar productos", 500));
+    return next(
+      new HttpError("Algo salió mal, no se pudo encontrar productos", 500)
+    );
   }
 };
 const listarProductosPorCategoria = async (req, res, next) => {
-  const { categoria } = req.params; // Obtiene la categoría de los parámetros de la ruta
+  const { nombreCategoria } = req.params;
 
   try {
-    const productos = await Producto.find({ categoria }); // Busca productos por la categoría
-    res.status(200).json(productos);
+    // Encuentra la categoría correspondiente
+    const categoria = await Categoria.findOne({ nombre: nombreCategoria });
+
+    if (!categoria) {
+      return next(new HttpError('Categoría no encontrada', 404));
+    }
+
+    // Busca productos con la categoría encontrada
+    const productos = await Producto.find({ categoria: categoria._id });
+
+    const productosConCategoria = await Promise.all(
+      productos.map(async (producto) => {
+        // Aquí puedes agregar más campos de la categoría si es necesario
+        const categoria = await Categoria.findById(producto.categoria);
+        return {
+          ...producto.toObject({ getters: true }),
+          categoria: categoria.toObject({ getters: true }),
+        };
+      })
+    );
+
+    res.status(200).json(productosConCategoria);
   } catch (err) {
-    return next(new HttpError('Algo salió mal, no se pudo encontrar productos por categoría', 500));
+    return next(new HttpError('Algo salió mal, no se pudieron encontrar productos por categoría', 500));
   }
 };
+
 
 const obtenerProductoPorId = async (req, res, next) => {
   const { id } = req.params;
@@ -37,21 +59,18 @@ const obtenerProductoPorId = async (req, res, next) => {
     return next(new HttpError("Algo salió mal al buscar el producto.", 500));
   }
 };
-
 const crearProducto = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    // Se define un objeto `errorMap` que mapea los nombres de campo a los mensajes de error correspondientes.
     const errorMap = {
       nombre: "El nombre no puede estar vacío",
       precio: "El precio debe ser un número válido",
       descripcion: "La descripción debe tener al menos 5 caracteres",
     };
+
     const individualErrors = errors.array().map((error) => {
-
-      const message = errorMap[error.path];
-
+      const message = errorMap[error.param];
       return message ? message : "Revisar los datos";
     });
 
@@ -63,12 +82,18 @@ const crearProducto = async (req, res, next) => {
   const { nombre, precio, descripcion, cantidad, categoria } = req.body;
 
   try {
+    const categoriaExistente = await Categoria.findOne({ nombre: categoria });
+
+    if (!categoriaExistente) {
+      return next(new HttpError("La categoría especificada no existe.", 404));
+    }
+
     const producto = new Producto({
       nombre,
       precio,
       descripcion,
       cantidad,
-      categoria,
+      categoria: categoriaExistente, // Asignar la categoría existente
     });
 
     await producto.save();
@@ -89,7 +114,7 @@ const actualizarProducto = async (req, res, next) => {
     };
 
     const individualErrors = errors.array().map((error) => {
-      const message = errorMap[error.path]; // 
+      const message = errorMap[error.path]; //
 
       return message ? message : "Revisar los datos";
     });
@@ -112,7 +137,9 @@ const actualizarProducto = async (req, res, next) => {
     }
 
     if (!producto) {
-      return next(new HttpError("No se encontró el producto para actualizar.", 404));
+      return next(
+        new HttpError("No se encontró el producto para actualizar.", 404)
+      );
     }
 
     // Actualiza los campos "precio" y "cantidad"
@@ -127,7 +154,9 @@ const actualizarProducto = async (req, res, next) => {
 
     res.status(200).json({ producto: producto.toObject({ getters: true }) });
   } catch (error) {
-    return next(new HttpError("Algo salió mal al actualizar el producto.", 500));
+    return next(
+      new HttpError("Algo salió mal al actualizar el producto.", 500)
+    );
   }
 };
 
@@ -145,8 +174,6 @@ const borrarProducto = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   listarProductos,
   listarProductosPorCategoria,
@@ -155,4 +182,3 @@ module.exports = {
   actualizarProducto,
   borrarProducto,
 };
-

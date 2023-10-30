@@ -70,17 +70,18 @@ const crearCategoria = async (req, res, next) => {
     }
   };
   
-
 // Actualizar una categoría por su ID
 const actualizarCategoria = async (req, res, next) => {
+  
   const categoriaId = req.params.cid;
   const { nombre } = req.body;
 
+  console.log(categoriaId)
   let categoria;
   try {
     categoria = await Categoria.findById(categoriaId);
   } catch (err) {
-    return next(new HttpError("No se pudo encontrar la categoría.", 500));
+    return next(new HttpError("Algo salio mal al buscar la categoria.", 500));
   }
 
   if (!categoria) {

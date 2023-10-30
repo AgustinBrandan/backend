@@ -11,9 +11,9 @@ const productoSchema = new mongoose.Schema({
   },
   descripcion: String,
   cantidad: Number,
-  categoria: { type:String,
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: 'Categoria',
+  categoria: { 
+     type: mongoose.Schema.Types.ObjectId,
+     ref: 'Categoria',
   },
 });
 
