@@ -8,7 +8,7 @@ router.get("/", productoController.listarProductos);
 
 router.get("/:id", productoController.obtenerProductoPorId);
 
-router.get("/categoria:nombreCategoria", productoController.listarProductosPorCategoria);
+router.get("/categoria/:nombreCategoria", productoController.listarProductosPorCategoria);
 
 router.post(
   "/",

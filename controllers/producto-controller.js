@@ -59,6 +59,7 @@ const obtenerProductoPorId = async (req, res, next) => {
     return next(new HttpError("Algo salió mal al buscar el producto.", 500));
   }
 };
+
 const crearProducto = async (req, res, next) => {
   const errors = validationResult(req);
 
@@ -82,10 +83,15 @@ const crearProducto = async (req, res, next) => {
   const { nombre, precio, descripcion, cantidad, categoria } = req.body;
 
   try {
-    const categoriaExistente = await Categoria.findOne({ nombre: categoria });
+    let categoriaExistente = null;
 
-    if (!categoriaExistente) {
-      return next(new HttpError("La categoría especificada no existe.", 404));
+    if (categoria) {
+      // Verificar si se proporcionó una categoría
+      categoriaExistente = await Categoria.findOne({ nombre: categoria });
+
+      if (!categoriaExistente) {
+        return next(new HttpError("La categoría especificada no existe.", 404));
+      }
     }
 
     const producto = new Producto({
@@ -93,7 +99,7 @@ const crearProducto = async (req, res, next) => {
       precio,
       descripcion,
       cantidad,
-      categoria: categoriaExistente, // Asignar la categoría existente
+      categoria: categoriaExistente, // Asignar la categoría existente o nula si no se proporciona
     });
 
     await producto.save();
