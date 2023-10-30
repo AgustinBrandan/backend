@@ -139,7 +139,7 @@ const borrarProducto = async (req, res, next) => {
     if (!producto) {
       return next(new HttpError("Producto no encontrado.", 404));
     }
-    res.status(204).end(); // Envía una respuesta sin contenido (204) para indicar que la eliminación fue exitosa.
+    res.status(200).json({ message: "Lugar eliminado." });
   } catch (err) {
     return next(new HttpError("No se pudo eliminar el producto.", 500));
   }
