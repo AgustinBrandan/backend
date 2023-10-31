@@ -10,10 +10,10 @@ router.post('/', carritoController.crearCarrito);
 router.post('/:carritoId/productos', carritoController.agregarProducto);
 
 // Actualizar la cantidad de un producto en el carrito de compra
-router.patch('/:carritoId/productos/:productoId', carritoController.actualizarProducto);
+router.patch('/:carritoId/producto/:productoId', carritoController.actualizarProducto);
 
 // Borrar un producto del carrito de compra
-router.delete('/:carritoId/productos/:productoId', carritoController.borrarProducto);
+router.delete('/:carritoId/producto/:productoId', carritoController.borrarProducto);
 
 // Borrar un carrito de compra completo
 router.delete('/:carritoId', carritoController.borrarCarrito);

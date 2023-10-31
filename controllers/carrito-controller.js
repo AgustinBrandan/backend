@@ -18,8 +18,8 @@ const crearCarrito = async (req, res, next) => {
 };
 
 // Agregar un producto al carrito de compra
-// Agregar un producto al carrito de compra
 const agregarProducto = async (req, res, next) => {
+
     const { carritoId } = req.params;
     const { productoId, cantidad } = req.body;
   
@@ -48,6 +48,7 @@ const agregarProducto = async (req, res, next) => {
 
 // Actualizar la cantidad de un producto en el carrito de compra
 const actualizarProducto = async (req, res, next) => {
+
   const { carritoId, productoId } = req.params;
   const { cantidad } = req.body;
 

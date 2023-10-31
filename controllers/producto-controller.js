@@ -113,21 +113,7 @@ const actualizarProducto = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    // Se define un objeto `errorMap` que mapea los nombres de campo a los mensajes de error correspondientes.
-    const errorMap = {
-      precio: "El precio debe ser un número válido",
-      cantidad: "La cantidad debe ser un número válido",
-    };
-
-    const individualErrors = errors.array().map((error) => {
-      const message = errorMap[error.path]; //
-
-      return message ? message : "Revisar los datos";
-    });
-
-    if (individualErrors.length > 0) {
-      return next(new HttpError(individualErrors, 422));
-    }
+    next(new HttpError("Ingreso invalido, por favor revisar los datos", 422));
   }
 
   const { precio, cantidad } = req.body; // Solo se actualizan los campos "precio" y "cantidad"
@@ -174,7 +160,7 @@ const borrarProducto = async (req, res, next) => {
     if (!producto) {
       return next(new HttpError("Producto no encontrado.", 404));
     }
-    res.status(200).json({ message: "Lugar eliminado." });
+    res.status(200).json({ message: "Producto Eliminado." });
   } catch (err) {
     return next(new HttpError("No se pudo eliminar el producto.", 500));
   }

@@ -76,7 +76,7 @@ const actualizarCategoria = async (req, res, next) => {
   const categoriaId = req.params.cid;
   const { nombre } = req.body;
 
-  console.log(categoriaId)
+
   let categoria;
   try {
     categoria = await Categoria.findById(categoriaId);
