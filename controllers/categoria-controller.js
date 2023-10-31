@@ -101,24 +101,20 @@ const actualizarCategoria = async (req, res, next) => {
 // Borrar una categoría por su ID
 const borrarCategoria = async (req, res, next) => {
   const categoriaId = req.params.cid;
-  let categoria;
-  try {
-    categoria = await Categoria.findById(categoriaId);
-  } catch (err) {
-    return next(new HttpError("No se pudo encontrar la categoría.", 500));
-  }
-
-  if (!categoria) {
-    return next(new HttpError("Categoría no encontrada.", 404));
-  }
 
   try {
-    await categoria.remove();
+    const categoria = await Categoria.findByIdAndRemove(categoriaId);
+
+    if (!categoria) {
+      return next(new HttpError("Categoría no encontrada.", 404));
+    }
+
+    res.status(200).json({ message: "Categoría eliminada." });
   } catch (err) {
     return next(new HttpError("No se pudo eliminar la categoría.", 500));
   }
-  res.status(200).json({ message: "Categoría eliminada." });
 };
+
 
 module.exports = {
   listarCategorias,
