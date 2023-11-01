@@ -79,7 +79,7 @@ const actualizarCategoria = async (req, res, next) => {
   }
   
   const categoriaId = req.params.cid;
-  const { nombre } = req.body;
+  const { nombre,descripcion } = req.body;
 
 
   let categoria;
@@ -94,6 +94,7 @@ const actualizarCategoria = async (req, res, next) => {
   }
 
   categoria.nombre = nombre;
+  categoria.descripcion = descripcion;
 
   try {
     await categoria.save();
