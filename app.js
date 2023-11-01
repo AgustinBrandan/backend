@@ -8,6 +8,7 @@ const HttpError = require("./models/http.error");
 const productoRoutes = require("./routes/producto-Routes");
 const categoriaRoutes = require("./routes/categoria-Routes");
 const carritoRoutes = require("./routes/carrito-Routes");
+const ordenRoutes = require("./routes/orden-Routes");
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/api/productos", productoRoutes); 
 app.use("/api/categorias", categoriaRoutes); 
 app.use("/api/carrito", carritoRoutes); 
+app.use("/api/orden", ordenRoutes); 
 // Manejo rutas no definidas
 app.use((req, res, next) => {
     throw new HttpError("Esta Ruta no existe", 404);
