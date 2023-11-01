@@ -121,6 +121,9 @@ const borrarProducto = async (req, res, next) => {
 
     carrito.precioTotal -=
       producto.precio * carrito.productos[productoEnCarritoIndex].cantidad;
+
+    // Formatea el precio total a 2 decimales
+    carrito.precioTotal = carrito.precioTotal.toFixed(2);
     carrito.productos.splice(productoEnCarritoIndex, 1);
 
     await carrito.save();
