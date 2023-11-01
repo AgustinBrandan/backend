@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "8709b012-c2bf-41b3-a40b-540132833625",
+		"name": "E-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25202882"
+	},
+	"item": [
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Mostrar todos los productos"
+					},
+					"response": []
+				},
+				{
+					"name": "ProductoID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/productos/65411907d1d24b56b9796d3c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos",
+								"65411907d1d24b56b9796d3c"
+							]
+						},
+						"description": "Mostrar producto por ID"
+					},
+					"response": []
+				},
+				{
+					"name": "ProductosCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/productos/categoria/Botines",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos",
+								"categoria",
+								"Botines"
+							]
+						},
+						"description": "Mostrar productos por categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Botines Adidas\",\r\n  \"precio\": 70.99,\r\n  \"descripcion\": \"Botines con tapones nike\",\r\n  \"cantidad\": 4,\r\n  \"categoria\":\"Botines\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Crear un nuevo producto"
+					},
+					"response": []
+				},
+				{
+					"name": "Producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/productos/654253afb48ed91bb961c908",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos",
+								"654253afb48ed91bb961c908"
+							]
+						},
+						"description": "Borrar un producto"
+					},
+					"response": []
+				},
+				{
+					"name": "producto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"precio\": 95.99,\r\n    \"cantidad\":20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/productos/65425370b48ed91bb961c905",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"productos",
+								"65425370b48ed91bb961c905"
+							]
+						},
+						"description": "Actualizar un producto"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints de producto"
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						},
+						"description": "Mostrar todas las categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "CategoriaId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/categorias/654252fab48ed91bb961c901",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categorias",
+								"654252fab48ed91bb961c901"
+							]
+						},
+						"description": "Mostrar categoria por ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Natacion\",\r\n    \"descripcion\":\"Productos para natacion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						},
+						"description": "Crear nueva categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"natacion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/categorias/654256ecb48ed91bb961c91a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categorias",
+								"654256ecb48ed91bb961c91a"
+							]
+						},
+						"description": "Actualizar una categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/categorias/654256ecb48ed91bb961c91a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"categorias",
+								"654256ecb48ed91bb961c91a"
+							]
+						},
+						"description": "Borrar categoria"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints de categoria"
+		},
+		{
+			"name": "Carrito",
+			"item": [
+				{
+					"name": "CrearCarrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carrito",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carrito"
+							]
+						},
+						"description": "Crear un carrito de compra"
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n        \"productoId\":\"65425370b48ed91bb961c905\",\r\n        \"cantidad\":2\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/carrito/65425bb9c03cf7089a75013f/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carrito",
+								"65425bb9c03cf7089a75013f",
+								"productos"
+							]
+						},
+						"description": "Agregar un producto a un carrito de compra"
+					},
+					"response": []
+				},
+				{
+					"name": "ProductoCarrito",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cantidad\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/carrito/65425bb9c03cf7089a75013f/producto/65425370b48ed91bb961c905",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carrito",
+								"65425bb9c03cf7089a75013f",
+								"producto",
+								"65425370b48ed91bb961c905"
+							]
+						},
+						"description": "Actualizar la cantidad de producto en el carrito"
+					},
+					"response": []
+				},
+				{
+					"name": "ProductoCarrito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carrito/65425bb9c03cf7089a75013f/producto/65425370b48ed91bb961c905",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carrito",
+								"65425bb9c03cf7089a75013f",
+								"producto",
+								"65425370b48ed91bb961c905"
+							]
+						},
+						"description": "Eliminar un producto del carrito"
+					},
+					"response": []
+				},
+				{
+					"name": "Carrito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/carrito/654258b0266cd37ff40514dd/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"carrito",
+								"654258b0266cd37ff40514dd",
+								""
+							]
+						},
+						"description": "Eliminar el carrito"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints de Carrito"
+		}
+	]
+}
