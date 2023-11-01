@@ -68,10 +68,11 @@ const crearProducto = async (req, res, next) => {
       nombre: "El nombre no puede estar vacío",
       precio: "El precio debe ser un número válido",
       descripcion: "La descripción debe tener al menos 5 caracteres",
+      cantidad: "La cantidad debe ser un numero valido",
     };
 
     const individualErrors = errors.array().map((error) => {
-      const message = errorMap[error.param];
+      const message = errorMap[error.path];
       return message ? message : "Revisar los datos";
     });
 
@@ -113,7 +114,7 @@ const actualizarProducto = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    next(new HttpError("Ingreso invalido, por favor revisar los datos", 422));
+    next(new HttpError("Ingreso invalido, por favor revisar ", 422));
   }
 
   const { precio, cantidad } = req.body; // Solo se actualizan los campos "precio" y "cantidad"

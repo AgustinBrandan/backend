@@ -35,7 +35,7 @@ const crearCategoria = async (req, res, next) => {
     if (!errors.isEmpty()) {
       
       const errorMap = {
-        nombre: "El nombre no puede estar vacío",
+        nombre: "Debes ingresar un nombre a la categoria",
 
       };
       const individualErrors = errors.array().map((error) => {
@@ -72,6 +72,11 @@ const crearCategoria = async (req, res, next) => {
   
 // Actualizar una categoría por su ID
 const actualizarCategoria = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    next(new HttpError("Ingreso invalido, por favor revisar ", 422));
+  }
   
   const categoriaId = req.params.cid;
   const { nombre } = req.body;

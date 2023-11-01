@@ -16,6 +16,7 @@ router.post(
     check("nombre").not().isEmpty(),
     check("precio").isNumeric(),
     check("descripcion").isLength({ min: 5 }),
+    check('cantidad').isNumeric(),
   ],
   productoController.crearProducto
 );
