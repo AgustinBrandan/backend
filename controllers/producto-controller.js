@@ -1,8 +1,8 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const HttpError = require("../models/http.error");
-const Categoria = require('../models/categoria')
-const Producto = require("../models/producto"); // Importa el modelo de Producto
+const Categoria = require('../models/categoria');
+const Producto = require("../models/producto");
 
 const listarProductos = async (req, res, next) => {
   try {
@@ -117,7 +117,7 @@ const actualizarProducto = async (req, res, next) => {
     next(new HttpError("Ingreso invalido, por favor revisar ", 422));
   }
 
-  const { precio, cantidad } = req.body; // Solo se actualizan los campos "precio" y "cantidad"
+  const { precio, cantidad } = req.body;
   const productoId = req.params.pid;
 
   try {

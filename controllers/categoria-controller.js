@@ -56,7 +56,7 @@ const crearCategoria = async (req, res, next) => {
       const categoriaExistente = await Categoria.findOne({ nombre });
   
       if (categoriaExistente) {
-        return next(new HttpError("La categoría ya existe.", 422)); // Código de estado 422 para "Unprocessable Entity"
+        return next(new HttpError("La categoría ya existe.", 422)); 
       }
   
       const nuevaCategoria = new Categoria({

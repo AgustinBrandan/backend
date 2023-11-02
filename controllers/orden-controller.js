@@ -7,8 +7,8 @@ const HttpError = require("../models/http.error");
 
 // Generar una orden de compra basada en un carrito
 const generarOrdenCompra = async (req, res, next) => {
-  const { carritoId } = req.params; // Suponiendo que recibes el ID del carrito en los parámetros
-  const { clienteEmail, clienteDireccion } = req.body; // Datos del cliente
+  const { carritoId } = req.params; 
+  const { clienteEmail, clienteDireccion } = req.body; 
 
   try {
     const carrito = await Carrito.findById(carritoId);
@@ -37,7 +37,7 @@ const generarOrdenCompra = async (req, res, next) => {
 };
 
 const realizarPago = async (req, res, next) => {
-    const { ordenId } = req.params; // Suponemos que recibes el ID de la orden en los parámetros
+    const { ordenId } = req.params; 
   
     try {
       const orden = await OrdenCompra.findById(ordenId);

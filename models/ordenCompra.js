@@ -16,9 +16,9 @@ const ordenCompraSchema = new mongoose.Schema({
   },
   pagado: {
     type: Boolean,
-    default: false, // Por defecto, la orden no está pagada
+    default: false, 
   },
-  // Otros campos relacionados al pedido
+
 });
 
 const OrdenCompra = mongoose.model("OrdenCompra", ordenCompraSchema);

@@ -5,7 +5,7 @@ const carritoSchema = new mongoose.Schema({
     {
       producto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Producto", // Hacer referencia al modelo de Producto
+        ref: "Producto",
       },
       cantidad: Number,
     },

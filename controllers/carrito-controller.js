@@ -2,7 +2,7 @@ const Carrito = require("../models/carrito");
 const Producto = require("../models/producto");
 const HttpError = require("../models/http.error");
 
-// Crear un carrito de compra
+// Crear un carrito de compra vacio
 const crearCarrito = async (req, res, next) => {
   const nuevoCarrito = new Carrito({
     productos: [],
@@ -19,7 +19,7 @@ const crearCarrito = async (req, res, next) => {
 
 //Crear Carrito con lista de productos
 const crearCarritoProductos = async (req, res, next) => {
-  // Desestructura directamente la lista de productos iniciales desde la solicitud.
+
   const { productos } = req.body;
 
   if (!productos || !Array.isArray(productos)) {
