@@ -4,9 +4,9 @@ const carritoController = require('../controllers/carrito-controller');
 
 
 // Crear un carrito Vacio
-router.post('/crear-carrito', carritoController.crearCarrito);
+router.post('/', carritoController.crearCarrito);
 // Crear Carrito con lista
-router.post('/', carritoController.crearCarritoProductos);
+router.post('/crear-carrito', carritoController.crearCarritoProductos);
 
 // Agregar un producto al carrito de compra
 router.post('/:carritoId/productos', carritoController.agregarProducto);
