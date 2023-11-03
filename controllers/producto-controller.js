@@ -84,6 +84,12 @@ const crearProducto = async (req, res, next) => {
   const { nombre, precio, descripcion, cantidad, categoria } = req.body;
 
   try {
+    // Verificar si el producto con el mismo nombre ya existe en la base de datos
+    const productoExistente = await Producto.findOne({ nombre });
+
+    if (productoExistente) {
+      return next(new HttpError("El producto con el mismo nombre ya existe.", 409));
+    }
     let categoriaExistente = null;
 
     if (categoria) {
